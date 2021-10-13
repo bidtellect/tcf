@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Company>Bidtellect</Company>
+    <RootNamespace>Bidtellect.Tcf</RootNamespace>
+    <Authors>Bidtellect Team</Authors>
+    <AssemblyName>Bidtellect.Tcf</AssemblyName>
+  </PropertyGroup>
+
+</Project>
