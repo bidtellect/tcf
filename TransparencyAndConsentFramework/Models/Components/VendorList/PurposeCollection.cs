@@ -12,7 +12,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         protected Dictionary<int, Purpose> purposes;
 
         /// <summary>
-        /// Gets the number of <c>Purpose</c> objects contained in this collection.
+        /// Gets the number of elements contained in this collection.
         /// </summary>
         public int Count => purposes.Count;
 

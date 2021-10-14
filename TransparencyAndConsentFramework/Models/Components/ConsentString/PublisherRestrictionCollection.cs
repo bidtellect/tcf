@@ -11,7 +11,7 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         protected Dictionary<int, PublisherRestriction> publisherRestrictions;
 
         /// <summary>
-        /// Gets the number of <c>PublisherRestriction</c> objects contained in this collection.
+        /// Gets the number of elements contained in this collection.
         /// </summary>
         public int Count => publisherRestrictions.Count;
 
@@ -31,7 +31,7 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         }
 
         /// <summary>
-        /// Adds a Publisher Restriction for a given Purpose ID.
+        /// Adds a Publisher Restriction for a given Purpose ID to this collection.
         /// </summary>
         /// <param name="purposeId">The ID of the Purpose.</param>
         /// <param name="publisherRestriction">The Publisher Restriction.</param>
@@ -51,7 +51,7 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         }
 
         /// <summary>
-        /// Removes a Publisher Restriction for a given Purpose ID.
+        /// Removes a Publisher Restriction for a given Purpose ID from this collection.
         /// </summary>
         /// <param name="purposeId">The ID of the Purpose.</param>
         /// <returns>

@@ -12,7 +12,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         protected Dictionary<int, Feature> features;
 
         /// <summary>
-        /// Gets the number of <c>Feature</c> objects contained in this collection.
+        /// Gets the number of elements contained in this collection.
         /// </summary>
         public int Count => features.Count;
 
@@ -49,7 +49,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// Adds a Feature to this collection.
         /// </summary>
         /// <param name="featureId">The ID of the feature.</param>
-        /// <param name="feature">The feature to be added.</param>
+        /// <param name="feature">The Feature to be added.</param>
         /// <exception cref="ArgumentException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         public void Add(int featureId, Feature feature)
