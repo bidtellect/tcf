@@ -23,7 +23,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <remarks>
         /// These purposes are declared as performed on the legal basis of consent.
         /// </remarks>
-        public PurposeCollection Purposes { get; set; } = new();
+        public PurposeCollection Purposes { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of special purposes.
@@ -31,14 +31,14 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <remarks>
         /// These purposes are declared as performed on the legal basis of a legitimate interest.
         /// </remarks>
-        public PurposeCollection SpecialPurposes { get; set; } = new();
+        public PurposeCollection SpecialPurposes { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of legitimate-interest purposes.
         /// </summary>
         /// These purposes are declared as performed on the legal basis of legitimate interest.
         /// <remarks>
-        public PurposeCollection LegIntPurposes { get; set; } = new();
+        public PurposeCollection LegitimateInterestPurposes { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of flexible purposes.
@@ -48,7 +48,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// The <i>default</i> is determined by which of the other two mutually-exclusive
         /// purpose fields is used to declare the purpose for the vendor.
         /// </remarks>
-        public PurposeCollection FlexiblePurposes { get; set; } = new();
+        public PurposeCollection FlexiblePurposes { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of features.
@@ -56,7 +56,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <remarks>
         /// These are features which the vendor may utilize when performing some declared Purposes processing.
         /// </remarks>
-        public FeatureCollection Features { get; set; } = new();
+        public FeatureCollection Features { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of special features.
@@ -64,7 +64,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <remarks>
         /// These are features which the vendor may utilize when performing some declared Purposes processing.
         /// </remarks>
-        public FeatureCollection SpecialFeatures { get; set; } = new();
+        public FeatureCollection SpecialFeatures { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to the vendor's privacy policy document.

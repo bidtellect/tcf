@@ -166,7 +166,7 @@ namespace Bidtellect.Tcf.Serialization
             var customPurposesCount = reader.ReadInt(6);
 
             publisherTc.CustomPurposeConsents = ReadCustomPurpose(reader, customPurposesCount);
-            publisherTc.CustomPurposesLITransparency = ReadCustomPurpose(reader, customPurposesCount);
+            publisherTc.CustomPurposesLegitimateInterests = ReadCustomPurpose(reader, customPurposesCount);
 
             tcString.PublisherTc = publisherTc;
         }
@@ -195,9 +195,11 @@ namespace Bidtellect.Tcf.Serialization
 
         protected FeatureCollection ReadSpecialFeatures(BitReader reader)
         {
-            var collection = new FeatureCollection();
+            const int featureCount = 12;
 
-            var bitField = ReadBitField(reader, 12);
+            var bitField = ReadBitField(reader, featureCount);
+
+            var collection = new FeatureCollection(featureCount);
 
             if (specialFeatureLookup == null)
             {

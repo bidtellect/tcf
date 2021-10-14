@@ -13,7 +13,7 @@
         /// <summary>
         /// Gets or sets a collection of purposes.
         /// </summary>
-        public PurposeCollection Purposes { get; set; } = new();
+        public PurposeCollection Purposes { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of special features.
@@ -23,7 +23,7 @@
         /// users with a means to signal an opt-in choice as to whether vendors
         /// may employ the feature when performing any purpose processing.
         /// </remarks>
-        public FeatureCollection SpecialFeatures { get; set; } = new();
+        public FeatureCollection SpecialFeatures { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the stack.
