@@ -8,7 +8,7 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
     public class PublisherRestriction
     {
         /// <summary>
-        /// Gets or sets the restriction type.
+        /// Gets or sets the type of restriction.
         /// </summary>
         public RestrictionType RestrictionType { get; set; }
 
