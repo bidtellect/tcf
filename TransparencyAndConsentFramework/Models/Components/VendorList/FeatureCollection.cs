@@ -68,7 +68,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         }
 
         /// <summary>
-        /// Removes a Feature with the given Feature ID.
+        /// Removes a Feature with the given Feature ID from this collection.
         /// </summary>
         /// <param name="featureId">The ID of the Feature.</param>
         /// <returns>
@@ -80,7 +80,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         }
 
         /// <inheritdoc cref="FeatureCollection.Remove(int)"/>
-        /// <param name="feature">The feature which was removed from the collection.</param>
+        /// <param name="feature">The Feature which was removed from this collection.</param>
         public bool Remove(int featureId, out Feature feature)
         {
             return features.Remove(featureId, out feature);
@@ -89,10 +89,11 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <summary>
         /// Removes a Feature from this collection.
         /// </summary>
-        /// <param name="feature">The feature to be removed.</param>
+        /// <param name="feature">The Feature to be removed.</param>
         /// <returns>
         /// A value indicating whether the Feature was successfully found and removed.
         /// </returns>
+        /// <exception cref="System.ArgumentNullException"/>
         public bool Remove(Feature feature)
         {
             if (feature == null)
