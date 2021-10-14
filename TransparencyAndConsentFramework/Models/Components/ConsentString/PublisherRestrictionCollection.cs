@@ -31,7 +31,7 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         }
 
         /// <summary>
-        /// Adds a new Publisher Restriction for a given Purpose ID.
+        /// Adds a Publisher Restriction for a given Purpose ID.
         /// </summary>
         /// <param name="purposeId">The ID of the Purpose.</param>
         /// <param name="publisherRestriction">The Publisher Restriction.</param>
