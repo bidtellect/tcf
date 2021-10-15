@@ -7,9 +7,14 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
     /// <summary>
     /// Represents a collection of Features.
     /// </summary>
-    public class FeatureCollection : IEnumerable<Feature>
+    public class FeatureCollection : IEnumerable<KeyValuePair<int, Feature>>
     {
         protected Dictionary<int, Feature> features;
+
+        /// <summary>
+        /// Gets an enumerable collection of the Feature IDs contained in this collection.
+        /// </summary>
+        public IEnumerable<int> Ids => features.Keys;
 
         /// <summary>
         /// Gets the number of elements contained in this collection.
@@ -135,9 +140,9 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
             return features.TryGetValue(featureId, out feature);
         }
 
-        public IEnumerator<Feature> GetEnumerator()
+        public IEnumerator<KeyValuePair<int, Feature>> GetEnumerator()
         {
-            return features.Values.GetEnumerator();
+            return features.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

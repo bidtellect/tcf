@@ -7,9 +7,14 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
     /// <summary>
     /// Represents a collection of Vendors.
     /// </summary>
-    public class VendorCollection : IEnumerable<Vendor>
+    public class VendorCollection : IEnumerable<KeyValuePair<int, Vendor>>
     {
         protected Dictionary<int, Vendor> vendors = new();
+
+        /// <summary>
+        /// Gets an enumerable collection of the Vendor IDs contained in this collection.
+        /// </summary>
+        public IEnumerable<int> Ids => vendors.Keys;
 
         /// <summary>
         /// Gets the number of elements contained in this collection.
@@ -138,9 +143,9 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
             return vendors.TryGetValue(vendorId, out vendor);
         }
 
-        public IEnumerator<Vendor> GetEnumerator()
+        public IEnumerator<KeyValuePair<int, Vendor>> GetEnumerator()
         {
-            return vendors.Values.GetEnumerator();
+            return vendors.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -25,6 +25,6 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         /// <summary>
         /// Gets or sets a collection of Custom Purposes established on the legal basis of legitimate interest.
         /// </summary>
-        public PurposeCollection CustomPurposesLegitimateInterests { get; set; }
+        public PurposeCollection CustomPurposeLegitimateInterests { get; set; }
     }
 }

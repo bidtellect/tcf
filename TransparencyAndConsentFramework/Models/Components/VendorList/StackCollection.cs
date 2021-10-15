@@ -7,7 +7,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
     /// <summary>
     /// Represents a collection of Stacks.
     /// </summary>
-    public class StackCollection : IEnumerable<Stack>
+    public class StackCollection : IEnumerable<KeyValuePair<int, Stack>>
     {
         protected Dictionary<int, Stack> stacks;
 
@@ -114,9 +114,9 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
             return stacks.TryGetValue(stackId, out stack);
         }
 
-        public IEnumerator<Stack> GetEnumerator()
+        public IEnumerator<KeyValuePair<int, Stack>> GetEnumerator()
         {
-            return stacks.Values.GetEnumerator();
+            return stacks.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

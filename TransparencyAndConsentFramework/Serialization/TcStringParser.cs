@@ -9,31 +9,46 @@ using System.Text;
 
 namespace Bidtellect.Tcf.Serialization
 {
+    /// <summary>
+    /// Provides functionality to parse TC Strings.
+    /// </summary>
     public class TcStringParser
     {
-        //protected readonly Dictionary<int, Feature> featureLookup;
         protected readonly Dictionary<int, Feature> specialFeatureLookup;
-
         protected readonly Dictionary<int, Purpose> purposeLookup;
-        //protected readonly Dictionary<int, Purpose> specialPurposeLookup;
-
         protected readonly Dictionary<int, Vendor> vendorLookup;
 
+        /// <summary>
+        /// Initializes a new instance of <c>TcStringParser</c>.
+        /// </summary>
+        /// <param name="vendorList">
+        /// A Global Vendor List object used for reference when parsing.
+        /// This value can be <c>null</c>.
+        /// </param>
         public TcStringParser(VendorList vendorList)
         {
             if (vendorList != null)
             {
-                specialFeatureLookup = vendorList.SpecialFeatures.ToDictionary(x => x.Id, x => x);
-                purposeLookup = vendorList.Purposes.ToDictionary(x => x.Id, x => x);
-                vendorLookup = vendorList.Vendors.ToDictionary(x => x.Id, x => x);
+                specialFeatureLookup = vendorList.SpecialFeatures.ToDictionary(x => x.Key, x => x.Value);
+                purposeLookup = vendorList.Purposes.ToDictionary(x => x.Key, x => x.Value);
+                vendorLookup = vendorList.Vendors.ToDictionary(x => x.Key, x => x.Value);
             }
         }
 
+        /// <summary>
+        /// Parses the given string value into a <c>TcString</c> object.
+        /// </summary>
+        /// <param name="value">The value to be parsed.</param>
+        /// <returns>
+        /// A model which represents the given value when parsed.
+        /// </returns>
         public TcString Parse(string value)
         {
             return Parse(value, new ParseOptions());
         }
 
+        /// <inheritdoc cref="TcStringParser.Parse(string)" />
+        /// <param name="options">Parse options.</param>
         public TcString Parse(string value, ParseOptions options)
         {
             var tcString = new TcString();
@@ -166,7 +181,7 @@ namespace Bidtellect.Tcf.Serialization
             var customPurposesCount = reader.ReadInt(6);
 
             publisherTc.CustomPurposeConsents = ReadCustomPurpose(reader, customPurposesCount);
-            publisherTc.CustomPurposesLegitimateInterests = ReadCustomPurpose(reader, customPurposesCount);
+            publisherTc.CustomPurposeLegitimateInterests = ReadCustomPurpose(reader, customPurposesCount);
 
             tcString.PublisherTc = publisherTc;
         }
@@ -183,7 +198,7 @@ namespace Bidtellect.Tcf.Serialization
             return version;
         }
 
-        protected IEnumerable<KeyValuePair<int, bool>> ReadBitField(BitReader reader, int length)
+        protected virtual IEnumerable<KeyValuePair<int, bool>> ReadBitField(BitReader reader, int length)
         {
             var bits = reader.ReadBits(length);
 
@@ -193,83 +208,39 @@ namespace Bidtellect.Tcf.Serialization
             }
         }
 
-        protected FeatureCollection ReadSpecialFeatures(BitReader reader)
+        protected virtual FeatureCollection ReadSpecialFeatures(BitReader reader)
         {
             const int featureCount = 12;
 
-            var bitField = ReadBitField(reader, featureCount);
-
             var collection = new FeatureCollection(featureCount);
 
-            if (specialFeatureLookup == null)
+            foreach (var item in ReadBitField(reader, featureCount))
             {
-                foreach (var item in bitField)
+                if (item.Value)
                 {
-                    if (item.Value)
-                    {
-                        collection.Add(item.Key);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in bitField)
-                {
-                    if (item.Value)
-                    {
-                        if (specialFeatureLookup.TryGetValue(item.Key, out var feature))
-                        {
-                            collection.Add(item.Key, feature);
-                        }
-                        else
-                        {
-                            collection.Add(item.Key);
-                        }
-                    }
+                    collection.Add(item.Key, GetSpecialFeature(item.Key));
                 }
             }
 
             return collection;
         }
 
-        protected PurposeCollection ReadPurposes(BitReader reader, int length)
+        protected virtual PurposeCollection ReadPurposes(BitReader reader, int length)
         {
             var collection = new PurposeCollection();
 
-            var bitField = ReadBitField(reader, length);
-
-            if (purposeLookup == null)
+            foreach (var item in ReadBitField(reader, length))
             {
-                foreach (var item in bitField)
+                if (item.Value)
                 {
-                    if (item.Value)
-                    {
-                        collection.Add(item.Key);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in bitField)
-                {
-                    if (item.Value)
-                    {
-                        if (purposeLookup.TryGetValue(item.Key, out var feature))
-                        {
-                            collection.Add(item.Key, feature);
-                        }
-                        else
-                        {
-                            collection.Add(item.Key);
-                        }
-                    }
+                    collection.Add(item.Key, GetPurpose(item.Key));
                 }
             }
 
             return collection;
         }
 
-        protected PurposeCollection ReadCustomPurpose(BitReader reader, int length)
+        protected virtual PurposeCollection ReadCustomPurpose(BitReader reader, int length)
         {
             var collection = new PurposeCollection();
 
@@ -286,11 +257,10 @@ namespace Bidtellect.Tcf.Serialization
 
         protected virtual VendorCollection ReadVendors(BitReader reader)
         {
-            var collection = new VendorCollection();
-
             var maxVendorId = reader.ReadInt(16);
-
             var isRangeEncoding = reader.ReadBit();
+
+            var collection = new VendorCollection();
 
             if (isRangeEncoding)
             {
@@ -304,7 +274,7 @@ namespace Bidtellect.Tcf.Serialization
             return collection;
         }
 
-        protected void ReadVendorBitField(BitReader reader, int length, VendorCollection collection)
+        protected virtual void ReadVendorBitField(BitReader reader, int length, VendorCollection collection)
         {
             var bits = reader.ReadBits(length);
 
@@ -341,12 +311,12 @@ namespace Bidtellect.Tcf.Serialization
             }
         }
 
-        protected void AddVendor(VendorCollection collection, int vendorId)
+        protected virtual void AddVendor(VendorCollection collection, int vendorId)
         {
             collection.Add(vendorId, GetVendor(vendorId));
         }
 
-        protected void AddVendorRange(VendorCollection collection, int startVendorId, int endVendorId)
+        protected virtual void AddVendorRange(VendorCollection collection, int startVendorId, int endVendorId)
         {
             for (var i = startVendorId; i <= endVendorId; i += 1)
             {
@@ -371,7 +341,19 @@ namespace Bidtellect.Tcf.Serialization
             return value;
         }
 
-        protected PublisherRestrictionCollection ReadPublisherRestrictions(BitReader reader)
+        protected virtual string ReadLetters(BitReader reader, int count, int length)
+        {
+            var builder = new StringBuilder(count);
+
+            for (var i = 0; i < count; i += 1)
+            {
+                builder.Append((char)('a' + reader.ReadInt(length)));
+            }
+
+            return builder.ToString();
+        }
+
+        protected virtual PublisherRestrictionCollection ReadPublisherRestrictions(BitReader reader)
         {
             var count = reader.ReadInt(12);
 
@@ -396,49 +378,39 @@ namespace Bidtellect.Tcf.Serialization
             return collection;
         }
 
-        /// <summary>
-        /// Gets a purpose from a lookup object.
-        /// Returns null if a lookup is not available.
-        /// </summary>
-        /// <param name="purposeId">The ID of the purpose.</param>
-        protected Purpose GetPurpose(int purposeId)
+        protected virtual TValue GetItemFromLookup<TKey, TValue>(TKey key, IDictionary<TKey, TValue> lookup)
         {
-            if (purposeLookup == null)
+            if (lookup == null)
             {
-                return null;
+                return default;
             }
 
-            if (purposeLookup.TryGetValue(purposeId, out var purpose))
+            if (lookup.TryGetValue(key, out var value))
             {
-                return purpose;
+                return value;
             }
 
-            return null;
+            return default;
         }
 
-        protected Vendor GetVendor(int vendorId)
+        protected virtual Purpose GetPurpose(int purposeId)
         {
-            if (vendorLookup == null)
-            {
-                return null;
-            }
-
-            if (vendorLookup.TryGetValue(vendorId, out var vendor))
-            {
-                return vendor;
-            }
-
-            return null;
+            return GetItemFromLookup(purposeId, purposeLookup);
         }
 
-        protected static byte[] ParseBase64(string base64String)
+        protected virtual Feature GetSpecialFeature(int featureId)
         {
-            return Base64Converter.Decode(base64String);
+            return GetItemFromLookup(featureId, specialFeatureLookup);
+        }
+
+        protected virtual Vendor GetVendor(int vendorId)
+        {
+            return GetItemFromLookup(vendorId, vendorLookup);
         }
 
         protected static BitReader CreateBitReader(string base64String)
         {
-            return new BitReader(ParseBase64(base64String));
+            return new BitReader(Base64Converter.Decode(base64String));
         }
 
         protected static DateTime ReadEpoch(BitReader reader, int length)
@@ -446,18 +418,6 @@ namespace Bidtellect.Tcf.Serialization
             var epoch = reader.ReadLong(length);
 
             return new DateTime(1970, 1, 1).AddMilliseconds(epoch * 100);
-        }
-
-        protected static string ReadLetters(BitReader reader, int count, int length)
-        {
-            var builder = new StringBuilder(count);
-
-            for (var i = 0; i < count; i += 1)
-            {
-                builder.Append((char)('a' + reader.ReadInt(length)));
-            }
-
-            return builder.ToString();
         }
 
         protected static SegmentType GetSegmentType(string unparsedSection)
@@ -469,11 +429,29 @@ namespace Bidtellect.Tcf.Serialization
             return (SegmentType)((firstByte >> 5) & 0b111);
         }
 
+        /// <summary>
+        /// Represents <c>TcStringParser</c> options.
+        /// </summary>
         public struct ParseOptions
         {
+            /// <summary>
+            /// Gets or sets a value indicating whether to exclude the Core segment when parsing.
+            /// </summary>
             public bool ExcludeCore { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether to exclude the Disclosed Vendors segment when parsing.
+            /// </summary>
             public bool ExcludeDisclosedVendors { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether to exclude the Allowed Vendors segment when parsing.
+            /// </summary>
             public bool ExcludeAllowedVendors { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether to exclude Publisher TC segment when parsing.
+            /// </summary>
             public bool ExcludePublisherTc { get; set; }
         }
     }

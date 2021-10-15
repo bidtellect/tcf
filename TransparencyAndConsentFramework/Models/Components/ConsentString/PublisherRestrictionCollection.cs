@@ -6,8 +6,7 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
     /// <summary>
     /// Represents a collection a Publisher Restrictions index by Purpose ID.
     /// </summary>
-    public class PublisherRestrictionCollection : IEnumerable<PublisherRestriction>
-    {
+    public class PublisherRestrictionCollection : IEnumerable<KeyValuePair<int, PublisherRestriction>>    {
         protected Dictionary<int, PublisherRestriction> publisherRestrictions;
 
         /// <summary>
@@ -98,9 +97,9 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
             return publisherRestrictions.TryGetValue(purposeId, out publisherRestriction);
         }
 
-        public IEnumerator<PublisherRestriction> GetEnumerator()
+        public IEnumerator<KeyValuePair<int, PublisherRestriction>> GetEnumerator()
         {
-            return publisherRestrictions.Values.GetEnumerator();
+            return publisherRestrictions.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

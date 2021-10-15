@@ -7,9 +7,14 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
     /// <summary>
     /// Represents a collection of Purposes.
     /// </summary>
-    public class PurposeCollection : IEnumerable<Purpose>
+    public class PurposeCollection : IEnumerable<KeyValuePair<int, Purpose>>
     {
         protected Dictionary<int, Purpose> purposes;
+
+        /// <summary>
+        /// Gets an enumerable collection of the Purpose IDs contained in this collection.
+        /// </summary>
+        public IEnumerable<int> Ids => purposes.Keys;
 
         /// <summary>
         /// Gets the number of elements contained in this collection.
@@ -137,9 +142,9 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
             return purposes.TryGetValue(purposeId, out purpose);
         }
 
-        public IEnumerator<Purpose> GetEnumerator()
+        public IEnumerator<KeyValuePair<int, Purpose>> GetEnumerator()
         {
-            return purposes.Values.GetEnumerator();
+            return purposes.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
