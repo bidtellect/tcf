@@ -87,7 +87,7 @@ namespace Bidtellect.Tcf.Serialization
                     Write(writer, core.PublisherRestrictions);
                 }
 
-                return SerializeBase64(stream.ToArray());
+                return EncodeBase64(stream.ToArray());
             }
         }
 
@@ -103,7 +103,7 @@ namespace Bidtellect.Tcf.Serialization
                     Write(writer, vendors);
                 }
 
-                return SerializeBase64(stream.ToArray());
+                return EncodeBase64(stream.ToArray());
             }
         }
 
@@ -119,7 +119,7 @@ namespace Bidtellect.Tcf.Serialization
                     Write(writer, vendors);
                 }
 
-                return SerializeBase64(stream.ToArray());
+                return EncodeBase64(stream.ToArray());
             }
         }
 
@@ -146,11 +146,11 @@ namespace Bidtellect.Tcf.Serialization
                     Write(writer, publisherTc.CustomPurposeLegitimateInterests, customPurposesCount);
                 }
 
-                return SerializeBase64(stream.ToArray());
+                return EncodeBase64(stream.ToArray());
             }
         }
 
-        protected string SerializeBase64(byte[] value)
+        protected string EncodeBase64(byte[] value)
         {
             return Base64Converter.Encode(value);
         }
