@@ -1,4 +1,4 @@
-# Transparency and Consent Framework
+# Transparency and Consent Framework C# SDK
 
 A library written in C# which provides functionality to parse and serialize IAB TCF Strings.
 
