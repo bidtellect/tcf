@@ -10,7 +10,7 @@ This library currently only supports v2.0 of the specification.
 
 You can get the most recent version of the GVL using the `GvlClient`:
 
-```CS
+```cs
 var client = new GvlClient();
 
 VendorList gvl = client.Fetch();
@@ -22,7 +22,7 @@ Note: The GVL is not needed to parse TC strings as long as you know the Purpose 
 
 You can parse a TC String using the `TcStringParser`:
 
-```CS
+```cs
 var tcString = "COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQABAEAAAAOIAACAIAAAAQAIAgEAACEAAAAAgAQBAAAAAAAGBAAgAAAAAAAFAAECAAAgAAQARAEQAAAAAJAAIAAgAAAYQEAAAQmAgBC3ZAYzUw";
 
 // GVL can be null if the metadata is not needed.
@@ -33,17 +33,17 @@ TcString model = parser.parse(tcString);
 
 You can instruct the parser to skip certain segments of the TC Strings using `ParseOptions`:
 
-```CS
+```cs
 TcString model = parser.parse(tcString, new TcStringParser.ParseOptions {
     ExcludePublisherTc = true,
 });
 ```
 
-## Serialize TC String
+## Serialize a TC String
 
 You can serialize a `TcString` object back into a `string` representation using `TcStringSerializer`:
 
-```CS
+```cs
 var serializer = new TcStringSerializer();
 
 string message = serializer.serialize(tcString);
