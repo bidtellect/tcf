@@ -26,16 +26,16 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// </summary>
         public PurposeCollection()
         {
-            purposes = new();
+            purposes = new Dictionary<int, Purpose>();
         }
 
-        /// <inheritdoc cref="PurposeCollection.PurposeCollection"/>
+        /// <inheritdoc cref="PurposeCollection.PurposeCollection()"/>
         /// <param name="capacity">
         /// The initial capacity of the collection.
         /// </param>
         public PurposeCollection(int capacity)
         {
-            purposes = new(capacity);
+            purposes = new Dictionary<int, Purpose>(capacity);
         }
 
         /// <inheritdoc cref="PurposeCollection.Add(int, Purpose)" />
@@ -82,15 +82,6 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         public bool Remove(int purposeId)
         {
             return purposes.Remove(purposeId);
-        }
-
-        /// <inheritdoc cref="PurposeCollection.Remove(int)" />
-        /// <param name="purpose">
-        /// The Purpose which was removed from this collection.
-        /// </param>
-        public bool Remove(int purposeId, out Purpose purpose)
-        {
-            return purposes.Remove(purposeId, out purpose);
         }
 
         /// <summary>

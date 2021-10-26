@@ -9,7 +9,7 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
     /// </summary>
     public class VendorCollection : IEnumerable<KeyValuePair<int, Vendor>>
     {
-        protected Dictionary<int, Vendor> vendors = new();
+        protected Dictionary<int, Vendor> vendors = new Dictionary<int, Vendor>();
 
         /// <summary>
         /// Gets an enumerable collection of the Vendor IDs contained in this collection.
@@ -26,14 +26,14 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// </summary>
         public VendorCollection()
         {
-            vendors = new();
+            vendors = new Dictionary<int, Vendor>();
         }
 
-        /// <inheritdoc cref="VendorCollection.VendorCollection" />
+        /// <inheritdoc cref="VendorCollection.VendorCollection()" />
         /// <param name="capacity">The initial capacity of the collection.</param>
         public VendorCollection(int capacity)
         {
-            vendors = new(capacity);
+            vendors = new Dictionary<int, Vendor>(capacity);
         }
 
         /// <inheritdoc cref="VendorCollection.Add(int, Vendor)"/>
@@ -56,8 +56,8 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <summary>
         /// Adds a Vendor to this collection.
         /// </summary>
-        /// <param name="purposeId">The ID of the Vendor.</param>
-        /// <param name="purpose">The Vendor to be added.</param>
+        /// <param name="vendorId">The ID of the Vendor.</param>
+        /// <param name="vendor">The Vendor to be added.</param>
         /// <exception cref="ArgumentException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         public void Add(int vendorId, Vendor vendor)
@@ -85,13 +85,6 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         public bool Remove(int vendorId)
         {
             return vendors.Remove(vendorId);
-        }
-
-        /// <inheritdoc cref="VendorCollection.Remove(int)"/>
-        /// <param name="vendor">The Vendor which was removed from this collection.</param>
-        public bool Remove(int vendorId, out Vendor vendor)
-        {
-            return vendors.Remove(vendorId, out vendor);
         }
 
         /// <summary>

@@ -19,14 +19,14 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         /// </summary>
         public PublisherRestrictionCollection()
         {
-            publisherRestrictions = new();
+            publisherRestrictions = new Dictionary<int, PublisherRestriction>();
         }
 
-        /// <inheritdoc cref="PublisherRestrictionCollection.PublisherRestrictionCollection"/>
+        /// <inheritdoc cref="PublisherRestrictionCollection.PublisherRestrictionCollection()"/>
         /// <param name="capacity">The initial capacity of the collection.</param>
         public PublisherRestrictionCollection(int capacity)
         {
-            publisherRestrictions = new(capacity);
+            publisherRestrictions = new Dictionary<int, PublisherRestriction>(capacity);
         }
 
         /// <summary>
@@ -59,13 +59,6 @@ namespace Bidtellect.Tcf.Models.Components.ConsentString
         public bool Remove(int purposeId)
         {
             return publisherRestrictions.Remove(purposeId);
-        }
-
-        /// <inheritdoc cref="PublisherRestrictionCollection.Remove(int)"/>
-        /// <param name="publisherRestriction">The Publisher Restriction which was removed from the collection.</param>
-        public bool Remove(int purposeId, out PublisherRestriction publisherRestriction)
-        {
-            return publisherRestrictions.Remove(purposeId, out publisherRestriction);
         }
 
         /// <summary>

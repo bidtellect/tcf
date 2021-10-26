@@ -1,11 +1,40 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Company>Bidtellect</Company>
     <RootNamespace>Bidtellect.Tcf</RootNamespace>
     <Authors>Bidtellect Team</Authors>
     <AssemblyName>Bidtellect.Tcf</AssemblyName>
+    <Description>A library that provides functionality to parse and serialize IAB TCF Strings.</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>git@bitbucket.org:bidtellect/tcf.git</RepositoryUrl>
+    <PackageTags>TCF, IAB TCF, Consent String, Bidtellect</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageProjectUrl>https://bitbucket.org/bidtellect/tcf</PackageProjectUrl>
+    <PackageIcon>bidtellect.png</PackageIcon>
+    <PackageIconUrl />
+    <Copyright>Copyright © 2021 Bidtellect, Inc.</Copyright>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Git\TransparencyAndConsentFramework\TransparencyAndConsentFramework\Bidtellect.Tcf.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\bidtellect.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+  </ItemGroup>
 
 </Project>

@@ -21,14 +21,14 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// </summary>
         public StackCollection()
         {
-            stacks = new();
+            stacks = new Dictionary<int, Stack>();
         }
 
-        /// <inheritdoc cref="StackCollection.StackCollection"/>
+        /// <inheritdoc cref="StackCollection.StackCollection()"/>
         /// <param name="capacity">The initial capacity of the collection.</param>
         public StackCollection(int capacity)
         {
-            stacks = new(capacity);
+            stacks = new Dictionary<int, Stack>(capacity);
         }
 
         /// <summary>
@@ -56,13 +56,6 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         public bool Remove(int stackId)
         {
             return stacks.Remove(stackId);
-        }
-
-        /// <inheritdoc cref="StackCollection.Remove(int)" />
-        /// <param name="stack">The Stack which was removed from this collection.</param>
-        public bool Remove(int stackId, out Stack stack)
-        {
-            return stacks.Remove(stackId, out stack);
         }
 
         /// <summary>

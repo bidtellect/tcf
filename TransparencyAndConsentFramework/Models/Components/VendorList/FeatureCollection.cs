@@ -26,16 +26,16 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// </summary>
         public FeatureCollection()
         {
-            features = new();
+            features = new Dictionary<int, Feature>();
         }
 
-        /// <inheritdoc cref="FeatureCollection.FeatureCollection"/>
+        /// <inheritdoc cref="FeatureCollection.FeatureCollection()"/>
         /// <param name="capacity">
         /// The initial capacity of the collection.
         /// </param>
         public FeatureCollection(int capacity)
         {
-            features = new(capacity);
+            features = new Dictionary<int, Feature>(capacity);
         }
 
         /// <inheritdoc cref="FeatureCollection.Add(int, Feature)"/>
@@ -82,13 +82,6 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         public bool Remove(int featureId)
         {
             return features.Remove(featureId);
-        }
-
-        /// <inheritdoc cref="FeatureCollection.Remove(int)"/>
-        /// <param name="feature">The Feature which was removed from this collection.</param>
-        public bool Remove(int featureId, out Feature feature)
-        {
-            return features.Remove(featureId, out feature);
         }
 
         /// <summary>

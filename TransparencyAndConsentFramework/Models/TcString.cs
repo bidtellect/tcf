@@ -4,7 +4,7 @@ using Bidtellect.Tcf.Models.Components.VendorList;
 namespace Bidtellect.Tcf.Models
 {
     /// <summary>
-    /// Represents a TCF TC String (Transparency & Consent String).
+    /// Represents a TCF TC String (Transparency &amp; Consent String).
     /// </summary>
     public class TcString
     {

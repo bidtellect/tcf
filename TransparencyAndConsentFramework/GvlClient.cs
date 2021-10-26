@@ -54,6 +54,7 @@ namespace Bidtellect.Tcf
                 Purposes = vendorList.Purposes,
                 SpecialFeatures = vendorList.SpecialFeatures,
             });
+
             vendorList.Vendors = ReadVendorCollection(ReadJsonObject(rootObject, "vendors"), new VendorLookup
             {
                 Purposes = vendorList.Purposes,

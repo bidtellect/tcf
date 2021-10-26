@@ -36,13 +36,15 @@ namespace Bidtellect.Tcf.Models.Components.VendorList
         /// <summary>
         /// Gets or sets a collection of legitimate-interest purposes.
         /// </summary>
-        /// These purposes are declared as performed on the legal basis of legitimate interest.
         /// <remarks>
+        /// These purposes are declared as performed on the legal basis of legitimate interest.
+        /// </remarks>
         public PurposeCollection LegitimateInterestPurposes { get; set; }
 
         /// <summary>
         /// Gets or sets a collection of flexible purposes.
         /// </summary>
+        /// <remarks>
         /// These are purposes where the vendor is flexible regarding the legal basis;
         /// they will perform the processing based on consent or a legitimate interest.
         /// The <i>default</i> is determined by which of the other two mutually-exclusive

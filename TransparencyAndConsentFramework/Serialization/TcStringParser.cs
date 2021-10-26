@@ -48,6 +48,7 @@ namespace Bidtellect.Tcf.Serialization
         }
 
         /// <inheritdoc cref="TcStringParser.Parse(string)" />
+        /// <param name="value">The value to be parsed.</param>
         /// <param name="options">Parse options.</param>
         public TcString Parse(string value, ParseOptions options)
         {
@@ -367,7 +368,7 @@ namespace Bidtellect.Tcf.Serialization
                 {
                     Purpose = GetPurpose(purposeId),
                     RestrictionType = (RestrictionType)reader.ReadInt(2),
-                    Vendors = new(),
+                    Vendors = new VendorCollection(),
                 };
 
                 ReadVendorRange(reader, publisherRestriction.Vendors);

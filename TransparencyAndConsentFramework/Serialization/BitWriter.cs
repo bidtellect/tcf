@@ -110,10 +110,9 @@ namespace Bidtellect.Tcf.Serialization
         }
 
         /// <summary>
-        /// Writes an unsigned integer in <i>base2</i> encoding.
+        /// Writes an unsigned integer in Fibonacci encoding.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        /// <param name="length">The number of bits used to encode the value.</param>
         public void WriteFib(int value)
         {
             if (value <= 0)
