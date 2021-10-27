@@ -28,13 +28,13 @@ var tcString = "COvFyGBOvFyGBAbAAAENAPCAAOAAAAAAAAAAAEEUACCKAAA.IFoEUQQgAIQwgIwQ
 // GVL can be null if the metadata is not needed.
 var parser = new TcStringParser(gvl);
 
-TcString model = parser.parse(tcString);
+TcString model = parser.Parse(tcString);
 ```
 
 You can instruct the parser to skip certain segments of the TC Strings using `ParseOptions`:
 
 ```cs
-TcString model = parser.parse(tcString, new TcStringParser.ParseOptions {
+TcString model = parser.Parse(tcString, new TcStringParser.ParseOptions {
     ExcludePublisherTc = true,
 });
 ```
@@ -46,5 +46,5 @@ You can serialize a `TcString` object back into a `string` representation using 
 ```cs
 var serializer = new TcStringSerializer();
 
-string message = serializer.serialize(tcString);
+string message = serializer.Serialize(tcString);
 ```
