@@ -19,11 +19,6 @@ namespace Bidtellect.Tcf.Models
         public VendorCollection DisclosedVendors { get; set; }
 
         /// <summary>
-        /// Gets or sets a collection of allowed Vendors.
-        /// </summary>
-        public VendorCollection AllowedVendors { get; set; }
-
-        /// <summary>
         /// Gets or sets transparency and consent for a set of personal
         /// data processing purposes for their own use.
         /// </summary>

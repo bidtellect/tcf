@@ -68,10 +68,6 @@ namespace Bidtellect.Tcf.Serialization
             {
                 switch (GetSegmentType(base64Segment))
                 {
-                    case SegmentType.AllowedVendors:
-                        ParseAllowedVendors(base64Segment, tcString, options);
-                        break;
-
                     case SegmentType.DisclosedVendors:
                         ParseDisclosedVendors(base64Segment, tcString, options);
                         break;
@@ -140,21 +136,6 @@ namespace Bidtellect.Tcf.Serialization
             reader.ReadInt(3);
 
             tcString.DisclosedVendors = ReadVendors(reader);
-        }
-
-        protected void ParseAllowedVendors(string value, TcString tcString, ParseOptions options)
-        {
-            if (options.ExcludeAllowedVendors)
-            {
-                return;
-            }
-
-            var reader = CreateBitReader(value);
-
-            // Discard Segment type.
-            reader.ReadInt(3);
-
-            tcString.AllowedVendors = ReadVendors(reader);
         }
 
         protected void ParsePublisherTc(string value, TcString tcString, ParseOptions options)
@@ -440,11 +421,6 @@ namespace Bidtellect.Tcf.Serialization
             /// Gets or sets a value indicating whether to exclude the Disclosed Vendors segment when parsing.
             /// </summary>
             public bool ExcludeDisclosedVendors { get; set; }
-
-            /// <summary>
-            /// Gets or sets a value indicating whether to exclude the Allowed Vendors segment when parsing.
-            /// </summary>
-            public bool ExcludeAllowedVendors { get; set; }
 
             /// <summary>
             /// Gets or sets a value indicating whether to exclude Publisher TC segment when parsing.

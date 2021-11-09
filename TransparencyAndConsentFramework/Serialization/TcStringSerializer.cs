@@ -27,12 +27,6 @@ namespace Bidtellect.Tcf.Serialization
 
             builder.Append(SerializeCore(tcString.Core));
 
-            if (tcString.AllowedVendors != null)
-            {
-                builder.Append(".");
-                builder.Append(SerializeAllowedVendors(tcString.AllowedVendors));
-            }
-
             if (tcString.DisclosedVendors != null)
             {
                 builder.Append(".");
@@ -98,22 +92,6 @@ namespace Bidtellect.Tcf.Serialization
                 using (var writer = new BitWriter(binaryWriter))
                 {
                     Write(writer, (int)SegmentType.DisclosedVendors, 3);
-
-                    Write(writer, vendors);
-                }
-
-                return EncodeBase64(stream.ToArray());
-            }
-        }
-
-        protected string SerializeAllowedVendors(VendorCollection vendors)
-        {
-            using (var stream = new MemoryStream())
-            {
-                using (var binaryWriter = new BinaryWriter(stream))
-                using (var writer = new BitWriter(binaryWriter))
-                {
-                    Write(writer, (int)SegmentType.AllowedVendors, 3);
 
                     Write(writer, vendors);
                 }
