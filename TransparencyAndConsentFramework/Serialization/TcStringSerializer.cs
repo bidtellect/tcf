@@ -1,7 +1,6 @@
 ﻿using Bidtellect.Tcf.Models;
 using Bidtellect.Tcf.Models.Components.ConsentString;
 using Bidtellect.Tcf.Models.Components.VendorList;
-using BT.Common.Encoding.Tcf.Consent;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,12 +26,6 @@ namespace Bidtellect.Tcf.Serialization
             var builder = new StringBuilder();
 
             builder.Append(SerializeCore(tcString.Core));
-
-            if (tcString.AllowedVendors != null)
-            {
-                builder.Append(".");
-                builder.Append(SerializeAllowedVendors(tcString.AllowedVendors));
-            }
 
             if (tcString.DisclosedVendors != null)
             {
@@ -99,22 +92,6 @@ namespace Bidtellect.Tcf.Serialization
                 using (var writer = new BitWriter(binaryWriter))
                 {
                     Write(writer, (int)SegmentType.DisclosedVendors, 3);
-
-                    Write(writer, vendors);
-                }
-
-                return EncodeBase64(stream.ToArray());
-            }
-        }
-
-        protected string SerializeAllowedVendors(VendorCollection vendors)
-        {
-            using (var stream = new MemoryStream())
-            {
-                using (var binaryWriter = new BinaryWriter(stream))
-                using (var writer = new BitWriter(binaryWriter))
-                {
-                    Write(writer, (int)SegmentType.AllowedVendors, 3);
 
                     Write(writer, vendors);
                 }

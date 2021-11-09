@@ -65,9 +65,6 @@ namespace Bidtellect.Tcf.Tests
                 Assert.AreEqual(disclosedVendors.Contains(i), model.DisclosedVendors.Contains(i));
             }
 
-            // Allowed Vendors
-            Assert.AreEqual(null, model.AllowedVendors);
-
             // Publisher Restrictions
             Assert.AreEqual(null, model.PublisherTc);
         }

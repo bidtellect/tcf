@@ -1,4 +1,4 @@
-﻿namespace BT.Common.Encoding.Tcf.Consent
+﻿namespace Bidtellect.Tcf.Models.Components.ConsentString
 {
     /// <summary>
     /// Specifies constants that define a segment in a TC String.
@@ -7,7 +7,6 @@
     {
         Default = 0,
         DisclosedVendors = 1,
-        AllowedVendors = 2,
         PublisherTc = 3,
     }
 }
