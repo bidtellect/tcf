@@ -15,7 +15,6 @@ namespace Bidtellect.Tcf.Serialization
         {
             InvalidVersion,
             InvalidVendorId,
-            InvalidSegment,
         }
     }
 }

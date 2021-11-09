@@ -79,9 +79,6 @@ namespace Bidtellect.Tcf.Serialization
                     case SegmentType.PublisherTc:
                         ParsePublisherTc(base64Segment, tcString, options);
                         break;
-
-                    default:
-                        throw new TcStringParserException(TcStringParserException.ExceptionType.InvalidSegment);
                 }
             }
         }
