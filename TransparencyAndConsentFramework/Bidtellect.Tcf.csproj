@@ -16,6 +16,8 @@
     <PackageIcon>bidtellect.png</PackageIcon>
     <PackageIconUrl />
     <Copyright>Copyright © 2021 Bidtellect, Inc.</Copyright>
+    <Version>1.1.0</Version>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
