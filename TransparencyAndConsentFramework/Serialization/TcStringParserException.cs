@@ -6,7 +6,7 @@ namespace Bidtellect.Tcf.Serialization
     {
         public ExceptionType Type { get; set; }
 
-        public TcStringParserException(ExceptionType type)
+        public TcStringParserException(ExceptionType type) : base(GetMessage(type))
         {
             Type = type;
         }
@@ -15,6 +15,21 @@ namespace Bidtellect.Tcf.Serialization
         {
             InvalidVersion,
             InvalidVendorId,
+        }
+
+        protected static string GetMessage(ExceptionType type)
+        {
+            switch (type)
+            {
+                case ExceptionType.InvalidVersion:
+                    return "Invalid TC String version.";
+
+                case ExceptionType.InvalidVendorId:
+                    return "Invalid Vendor ID.";
+
+                default:
+                    return "An error occurred while parsing a TC String.";
+            }
         }
     }
 }
