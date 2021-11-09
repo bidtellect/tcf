@@ -1,7 +1,6 @@
 ﻿using Bidtellect.Tcf.Models;
 using Bidtellect.Tcf.Models.Components.ConsentString;
 using Bidtellect.Tcf.Models.Components.VendorList;
-using BT.Common.Encoding.Tcf.Consent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
