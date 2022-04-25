@@ -4,6 +4,8 @@ A library written in C# which provides functionality to parse and serialize IAB 
 
 This library currently only supports v2.0 of the specification.
 
+[![Tests](https://github.com/bidtellect/tcf/actions/workflows/tests.yml/badge.svg)](https://github.com/bidtellect/tcf/actions/workflows/tests.yml)
+
 # Usage
 
 ## Fetch the Global Vendor List (GVL)
